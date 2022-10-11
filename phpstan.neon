@@ -1,0 +1,8 @@
+parameters:
+  level: 6
+  paths:
+    - src
+  checkMissingIterableValueType: false
+  ignoreErrors:
+    - '#Function config_path not found.#'
+    - '#Function config not found.#'

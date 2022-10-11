@@ -1,0 +1,40 @@
+{
+    "name": "dotsplatform/verification-api-sdk",
+    "description": "Library for dotsplatform verification client",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Dotsplatform\\Verification\\": "src/",
+            "Dots\\": "library/Dots/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Oleksandr Polosmak",
+            "email": "o.polosmak@dotsplatform.com"
+        }
+    ],
+    "require": {
+        "php" : "^8.1",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.5",
+        "illuminate/support": "^9.34"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.2",
+        "eduarguz/shift-php-cs": "^3.0"
+    },
+    "scripts": {
+        "init-pre-commit": [
+            "cp .git-hooks-pre-commit .git/hooks/pre-commit"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dotsplatform\\Sms\\SmsApiServiceProvider"
+            ]
+        }
+    }
+}
