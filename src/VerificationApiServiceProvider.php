@@ -14,8 +14,8 @@ class VerificationApiServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/sms-api-sdk.php',
-            'sms-server'
+            __DIR__ . '/../config/verification-api-sdk.php',
+            'verification-server'
         );
     }
 
