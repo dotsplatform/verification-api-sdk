@@ -18,7 +18,7 @@
     "require": {
         "php" : "^8.1",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^7.5",
+        "guzzlehttp/guzzle": "^7.0",
         "illuminate/support": "^9.34",
         "dotsplatform/utils": "1.*"
     },
