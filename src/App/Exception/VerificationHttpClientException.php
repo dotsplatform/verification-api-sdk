@@ -5,8 +5,7 @@
  * @author    Oleksandr Polosmak <o.polosmak@dotsplatform.com>
  */
 
-namespace MA\App\Verification\Exception;
-
+namespace Dotsplatform\Verification\Exception;
 
 use Exception;
 

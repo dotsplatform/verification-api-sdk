@@ -5,10 +5,9 @@
  * @author    Oleksandr Polosmak <o.polosmak@dotsplatform.com>
  */
 
-namespace MA\App\Verification;
+namespace Dotsplatform\Verification;
 
-
-use MA\App\Verification\Exception\VerificationHttpClientException;
+use Dotsplatform\Verification\Exception\VerificationHttpClientException;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
 use Psr\Http\Message\ResponseInterface;

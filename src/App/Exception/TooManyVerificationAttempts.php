@@ -5,7 +5,7 @@
  * @author    Egor Gerasimchuk <egor@mister.am>
  */
 
-namespace MA\App\Verification\Exception;
+namespace Dotsplatform\Verification\Exception;
 
 use Exception;
 

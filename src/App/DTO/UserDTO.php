@@ -5,7 +5,7 @@
  * @author    Oleksandr Polosmak <o.polosmak@dotsplatform.com>
  */
 
-namespace MA\App\Verification\DTO;
+namespace Dotsplatform\Verification\DTO;
 
 use Dots\Data\DTO;
 

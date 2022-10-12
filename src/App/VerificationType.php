@@ -5,8 +5,7 @@
  * @author    Oleksandr Polosmak <o.polosmak@dotsplatform.com>
  */
 
-namespace DotsPlatform\Verification;
-
+namespace Dotsplatform\Verification;
 
 abstract class VerificationType
 {

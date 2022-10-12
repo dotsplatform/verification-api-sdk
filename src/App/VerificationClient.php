@@ -5,16 +5,15 @@
  * @author    Oleksandr Polosmak <o.polosmak@dotsplatform.com>
  */
 
-namespace MA\App\Verification;
+namespace Dotsplatform\Verification;
 
-
-use  MA\App\Verification\DTO\UserDTO;
+use Dotsplatform\Verification\DTO\UserDTO;
 use GuzzleHttp\Exception\ClientException;
-use MA\App\Verification\DTO\StoreAccountDTO;
-use MA\App\Verification\DTO\VerificationAccountSettingsDTO;
-use MA\App\Verification\Exception\TooManyVerificationAttempts;
-use MA\App\Verification\Exception\VerificationCodeException;
-use MA\App\Verification\Exception\VerificationHttpClientException;
+use Dotsplatform\Verification\DTO\StoreAccountDTO;
+use Dotsplatform\Verification\DTO\VerificationAccountSettingsDTO;
+use Dotsplatform\Verification\Exception\TooManyVerificationAttempts;
+use Dotsplatform\Verification\Exception\VerificationCodeException;
+use Dotsplatform\Verification\Exception\VerificationHttpClientException;
 
 class VerificationClient extends HttpClient
 {

@@ -5,7 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Dotsplatform\\Verification\\": "src/",
+            "Dotsplatform\\Verification\\": "src/App",
             "Dots\\": "library/Dots/"
         }
     },

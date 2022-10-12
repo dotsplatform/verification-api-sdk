@@ -6,7 +6,7 @@
  * Time: 10:38
  */
 
-namespace MA\App\Verification\Exception;
+namespace Dotsplatform\Verification\Exception;
 
 class VerificationCodeException extends \Exception
 {
