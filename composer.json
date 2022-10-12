@@ -34,7 +34,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Dotsplatform\\Sms\\VerificationApiServiceProvider"
+                "Dotsplatform\\Verification\\VerificationApiServiceProvider"
             ]
         }
     }

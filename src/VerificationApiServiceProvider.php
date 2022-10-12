@@ -5,7 +5,7 @@
  * @author    Liuba Kalyta <kalyta@dotsplatform.com>
  */
 
-namespace Dotsplatform\CashbackApi;
+namespace Dotsplatform\Verification;
 
 use Illuminate\Support\ServiceProvider;
 
