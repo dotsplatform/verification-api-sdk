@@ -17,7 +17,7 @@ class StoreAccountDTO extends DTO
     protected string $lang;
     protected VerificationAccountSettingsDTO $settings;
 
-    public static function fromArray(array $data): self
+    public static function fromArray(array $data): static
     {
         $data['settings'] = VerificationAccountSettingsDTO::fromArray($data['settings'] ?? []);
         return parent::fromArray($data);

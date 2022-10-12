@@ -12,4 +12,5 @@ abstract class VerificationType
 {
     public const SMS = 'sms';
     public const CALL = 'call';
+    public const CALL_LAST_FOUR_DIGITS = 'call-last-four-digits';
 }

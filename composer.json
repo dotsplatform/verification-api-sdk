@@ -19,7 +19,8 @@
         "php" : "^8.1",
         "ext-json": "*",
         "guzzlehttp/guzzle": "^7.5",
-        "illuminate/support": "^9.34"
+        "illuminate/support": "^9.34",
+        "dotsplatform/utils": "1.*"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.2",

@@ -155,9 +155,9 @@ class VerificationClient extends HttpClient
         return sprintf(self::STORE_USER_URL_TEMPLATE, $accountId);
     }
 
-    private function generateFindUserUrl(string $accountId, string $userPhone): string
+    private function generateFindUserUrl(string $accountId, string $userId): string
     {
-        return sprintf(self::FIND_USER_URL_TEMPLATE, $accountId, $userPhone);
+        return sprintf(self::FIND_USER_URL_TEMPLATE, $accountId, $userId);
     }
 
     private function generateDeleteUserUrl(string $accountId, string $userPhone): string
