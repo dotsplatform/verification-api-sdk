@@ -22,7 +22,7 @@ class VerificationApiServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/verification-api-sdk.php' => config_path('verification-api-sdk'),
+            __DIR__ . '/../config/verification-api-sdk.php' => config_path('verification-api-sdk.php'),
         ], 'config');
     }
 }
