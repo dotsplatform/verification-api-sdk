@@ -10,6 +10,7 @@ namespace Dotsplatform\Verification;
 use Dotsplatform\Verification\Exception\VerificationHttpClientException;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class HttpClient
@@ -50,6 +51,14 @@ abstract class HttpClient
         return $this->decodeResponse($response);
     }
 
+    /**
+     * @param string $uri
+     * @param array|null $body
+     * @param array $params
+     * @return array
+     * @throws VerificationHttpClientException
+     * @throws GuzzleException
+     */
     protected function post(string $uri, ?array $body = null, array $params = []): array
     {
         $client = $this->makeClient();
@@ -93,6 +102,11 @@ abstract class HttpClient
         return $this->decodeResponse($response);
     }
 
+    /**
+     * @param ResponseInterface $response
+     * @return void
+     * @throws VerificationHttpClientException
+     */
     protected function parseResponseStatus(ResponseInterface $response): void
     {
         if ($response->getStatusCode() < 400) {
