@@ -7,6 +7,7 @@
 
 namespace Dotsplatform\Verification;
 
+use Dotsplatform\Verification\DTO\StartVerificationResponseDTO;
 use Dotsplatform\Verification\DTO\UserDTO;
 use GuzzleHttp\Exception\ClientException;
 use Dotsplatform\Verification\DTO\StoreAccountDTO;
@@ -14,6 +15,8 @@ use Dotsplatform\Verification\DTO\VerificationAccountSettingsDTO;
 use Dotsplatform\Verification\Exception\TooManyVerificationAttempts;
 use Dotsplatform\Verification\Exception\VerificationCodeException;
 use Dotsplatform\Verification\Exception\VerificationHttpClientException;
+use GuzzleHttp\Exception\GuzzleException;
+use RuntimeException;
 
 class VerificationClient extends HttpClient
 {
@@ -93,16 +96,23 @@ class VerificationClient extends HttpClient
         }
     }
 
+    /**
+     * @param string $accountId
+     * @param string $phone
+     * @return StartVerificationResponseDTO
+     * @throws TooManyVerificationAttempts
+     * @throws GuzzleException
+     */
     public function startVerification(
         string $accountId,
         string $phone,
-    ): void {
+    ): StartVerificationResponseDTO {
         $url = $this->generateStartVerificationUrl($accountId);
         $body = [
             'phone' => $phone,
         ];
         try {
-            $this->post($url, $body);
+           $response = $this->post($url, $body);
         } catch (VerificationHttpClientException $e) {
             if ($e->getCode() === 429) {
                 throw new TooManyVerificationAttempts(
@@ -111,8 +121,9 @@ class VerificationClient extends HttpClient
                 );
             }
         } catch (ClientException) {
-            return;
+            throw new RuntimeException('Invalid verification response');
         }
+        return StartVerificationResponseDTO::fromArray($response ?? []);
     }
 
     public function confirm(
