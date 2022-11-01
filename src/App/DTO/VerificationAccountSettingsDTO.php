@@ -12,6 +12,18 @@ use Dots\Data\DTO;
 class VerificationAccountSettingsDTO extends DTO
 {
     protected string $verificationType;
+    protected RikkiComDTO $rikki;
+
+    public static function fromArray(array $data): static
+    {
+        $data['rikki'] = RikkiComDTO::fromArray($data['rikki'] ?? []);
+        return parent::fromArray($data);
+    }
+
+    public function getRikki(): RikkiComDTO
+    {
+        return $this->rikki;
+    }
 
     public function getVerificationType(): string
     {
