@@ -9,10 +9,11 @@ namespace Dotsplatform\Verification\DTO;
 
 
 use Dots\Data\DTO;
+use Dotsplatform\Verification\VerificationType;
 
 class StartVerificationResponseDTO extends DTO
 {
-    protected string $verificationType;
+    protected string $verificationType = VerificationType::SMS;
 
     public function getVerificationType(): string
     {
