@@ -139,12 +139,10 @@ class VerificationClient extends HttpClient
         try {
             $this->post($url, $body);
         } catch (VerificationHttpClientException $e) {
-            if ($e->getCode() === 400) {
-                throw new VerificationCodeException(
-                    $e->getMessage(),
-                    $e->getCode(),
-                );
-            }
+            throw new VerificationCodeException(
+                $e->getMessage(),
+                $e->getCode(),
+            );
         } catch (ClientException) {
             return;
         }
