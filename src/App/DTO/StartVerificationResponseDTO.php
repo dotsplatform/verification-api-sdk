@@ -12,9 +12,9 @@ use Dots\Data\DTO;
 
 class StartVerificationResponseDTO extends DTO
 {
-    protected string $verificationType;
+    protected ?string $verificationType = null;
 
-    public function getVerificationType(): string
+    public function getVerificationType(): ?string
     {
         return $this->verificationType;
     }
