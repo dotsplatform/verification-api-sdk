@@ -113,7 +113,8 @@ abstract class HttpClient
             return;
         }
         throw new VerificationHttpClientException(
-            "Verification Request failed with status code {$response->getStatusCode()}"
+            'Verification Request failed with status code',
+            $response->getStatusCode(),
         );
     }
 
