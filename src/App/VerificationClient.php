@@ -143,8 +143,6 @@ class VerificationClient extends HttpClient
                 $e->getMessage(),
                 $e->getCode(),
             );
-        } catch (ClientException) {
-            return;
         }
     }
 
