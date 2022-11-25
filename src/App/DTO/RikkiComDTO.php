@@ -14,6 +14,12 @@ class RikkiComDTO extends DTO
 {
     protected ?string $login = null;
     protected ?string $password = null;
+    protected ?string $poolId = null;
+
+    public function getPoolId(): ?string
+    {
+        return $this->poolId;
+    }
 
     public function getLogin(): ?string
     {
