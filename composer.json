@@ -16,14 +16,14 @@
         }
     ],
     "require": {
-        "php" : "^8.1",
+        "php" : "^8.2",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^7.0",
-        "illuminate/support": "^9.",
+        "guzzlehttp/guzzle": "^7.5.",
+        "illuminate/support": "^9.|^10.",
         "dotsplatform/utils": "1.*"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.2",
+        "phpstan/phpstan": "^1.",
         "eduarguz/shift-php-cs": "^3.0"
     },
     "scripts": {
