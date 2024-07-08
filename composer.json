@@ -16,10 +16,10 @@
         }
     ],
     "require": {
-        "php" : "^8.2",
+        "php" : "^8.3",
         "ext-json": "*",
         "guzzlehttp/guzzle": "^7.5.",
-        "illuminate/support": "^9.|^10.",
+        "illuminate/support": "^9.|^10.|^11.",
         "dotsplatform/utils": "1.*"
     },
     "require-dev": {
