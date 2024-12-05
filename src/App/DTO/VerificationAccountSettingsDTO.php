@@ -17,6 +17,7 @@ class VerificationAccountSettingsDTO extends DTO
 
     public static function fromArray(array $data): static
     {
+        $data['rikki'] = RikkiComDTO::fromArray($data['rikki'] ?? []);
         $data['telegram_gateway'] = TelegramGatewayAccountSettingsDTO::fromArray($data['telegram_gateway'] ?? []);
         return parent::fromArray($data);
     }
