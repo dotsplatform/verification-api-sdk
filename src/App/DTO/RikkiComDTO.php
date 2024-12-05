@@ -7,7 +7,6 @@
 
 namespace Dotsplatform\Verification\DTO;
 
-
 use Dots\Data\DTO;
 
 class RikkiComDTO extends DTO
