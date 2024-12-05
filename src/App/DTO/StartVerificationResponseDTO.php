@@ -7,7 +7,6 @@
 
 namespace Dotsplatform\Verification\DTO;
 
-
 use Dots\Data\DTO;
 use Dotsplatform\Verification\VerificationType;
 

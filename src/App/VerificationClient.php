@@ -112,7 +112,7 @@ class VerificationClient extends HttpClient
             'phone' => $phone,
         ];
         try {
-           $response = $this->post($url, $body);
+            $response = $this->post($url, $body);
         } catch (VerificationHttpClientException $e) {
             if ($e->getCode() === 429) {
                 throw new TooManyVerificationAttempts(
