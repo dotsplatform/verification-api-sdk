@@ -13,6 +13,14 @@ use Illuminate\Support\Str;
 
 class CodeDTO extends DTO
 {
+    public const STATUS_CREATED = 0;
+
+    public const STATUS_USED = 10;
+
+    public const STATUS_DECLINED = 20;
+
+    public const STATUS_FAILED = 30;
+
     protected string $id;
 
     protected string $accountId;
