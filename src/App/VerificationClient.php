@@ -7,6 +7,8 @@
 
 namespace Dotsplatform\Verification;
 
+use Dotsplatform\Verification\DTO\CodesDTO;
+use Dotsplatform\Verification\DTO\CodesFiltersDTO;
 use Dotsplatform\Verification\DTO\StartVerificationResponseDTO;
 use Dotsplatform\Verification\DTO\UserDTO;
 use GuzzleHttp\Exception\ClientException;
@@ -16,6 +18,7 @@ use Dotsplatform\Verification\Exception\TooManyVerificationAttempts;
 use Dotsplatform\Verification\Exception\VerificationCodeException;
 use Dotsplatform\Verification\Exception\VerificationHttpClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Collection;
 use RuntimeException;
 
 class VerificationClient extends HttpClient
@@ -26,6 +29,8 @@ class VerificationClient extends HttpClient
     private const FIND_USER_URL_TEMPLATE = '/api/accounts/%s/users/%s';
     private const START_VERIFICATION_URL_TEMPLATE = '/api/accounts/%s/verification/start';
     private const CONFIRM_URL_TEMPLATE = '/api/accounts/%s/verification/confirm';
+
+    private const GET_VERIFICATION_CODES_TEMPLATE = '/api/accounts/%s/verification/codes';
     private const DELETE_USER_URL_TEMPLATE = '/api/accounts/%s/users/%s';
 
     public function storeAccount(StoreAccountDTO $dto): void
@@ -146,6 +151,17 @@ class VerificationClient extends HttpClient
         }
     }
 
+    public function searchVerificationCodes(
+        string $accountId,
+        CodesFiltersDTO $dto,
+    ): CodesDTO {
+        $url = $this->generateGetVerificationCodesUrl($accountId);
+
+        return CodesDTO::fromArray($this->get($url, [
+            'json' => $dto->toArray(),
+        ]) ?? []);
+    }
+
     private function generateStoreAccountUrl(): string
     {
         return self::STORE_ACCOUNT_URL_TEMPLATE;
@@ -179,5 +195,10 @@ class VerificationClient extends HttpClient
     private function generateConfirmUrl(string $accountId): string
     {
         return sprintf(self::CONFIRM_URL_TEMPLATE, $accountId);
+    }
+
+    private function generateGetVerificationCodesUrl(string $accountId): string
+    {
+        return sprintf(self::GET_VERIFICATION_CODES_TEMPLATE, $accountId);
     }
 }
