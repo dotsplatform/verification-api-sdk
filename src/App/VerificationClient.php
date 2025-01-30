@@ -7,6 +7,7 @@
 
 namespace Dotsplatform\Verification;
 
+use Dotsplatform\Verification\DTO\CodesDTO;
 use Dotsplatform\Verification\DTO\CodesFiltersDTO;
 use Dotsplatform\Verification\DTO\StartVerificationResponseDTO;
 use Dotsplatform\Verification\DTO\UserDTO;
@@ -153,11 +154,11 @@ class VerificationClient extends HttpClient
     public function searchVerificationCodes(
         string $accountId,
         CodesFiltersDTO $dto,
-    ): Collection {
+    ): CodesDTO {
         $url = $this->generateGetVerificationCodesUrl($accountId);
         $params = $dto->toArray();
 
-        return collect($this->get($url, $params) ?? []);
+        return CodesDTO::fromArray($this->get($url, $params) ?? []);
     }
 
     private function generateStoreAccountUrl(): string
