@@ -153,7 +153,7 @@ class VerificationClient extends HttpClient
         string $accountId,
         CodesFiltersDTO $dto,
     ): array {
-        $url = $this->generateConfirmUrl($accountId);
+        $url = $this->generateGetVerificationCodesUrl($accountId);
         $params = $dto->toArray();
 
         return $this->get($url, $params);
