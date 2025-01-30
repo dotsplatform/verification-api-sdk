@@ -17,6 +17,7 @@ use Dotsplatform\Verification\Exception\TooManyVerificationAttempts;
 use Dotsplatform\Verification\Exception\VerificationCodeException;
 use Dotsplatform\Verification\Exception\VerificationHttpClientException;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Collection;
 use RuntimeException;
 
 class VerificationClient extends HttpClient
@@ -152,11 +153,11 @@ class VerificationClient extends HttpClient
     public function searchVerificationCodes(
         string $accountId,
         CodesFiltersDTO $dto,
-    ): array {
+    ): Collection {
         $url = $this->generateGetVerificationCodesUrl($accountId);
         $params = $dto->toArray();
 
-        return $this->get($url, $params);
+        return collect($this->get($url, $params) ?? []);
     }
 
     private function generateStoreAccountUrl(): string
