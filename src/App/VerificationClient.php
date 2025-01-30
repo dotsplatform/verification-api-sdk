@@ -156,9 +156,10 @@ class VerificationClient extends HttpClient
         CodesFiltersDTO $dto,
     ): CodesDTO {
         $url = $this->generateGetVerificationCodesUrl($accountId);
-        $params = $dto->toArray();
 
-        return CodesDTO::fromArray($this->get($url, $params) ?? []);
+        return CodesDTO::fromArray($this->get($url, [
+            'json' => $dto->toArray(),
+        ]) ?? []);
     }
 
     private function generateStoreAccountUrl(): string
