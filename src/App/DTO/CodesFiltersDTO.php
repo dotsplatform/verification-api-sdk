@@ -12,9 +12,9 @@ use Dots\Data\DTO;
 
 class CodesFiltersDTO extends DTO
 {
-    protected int $timeFrom;
+    protected int $dateFrom;
 
-    protected int $timeTo;
+    protected int $dateTo;
 
     protected ?int $status;
 
@@ -22,14 +22,18 @@ class CodesFiltersDTO extends DTO
 
     protected ?string $phone;
 
-    public function getTimeFrom(): int
+    protected int $limit = 50;
+
+    protected int $offset = 0;
+
+    public function getDateFrom(): int
     {
-        return $this->timeFrom;
+        return $this->dateFrom;
     }
 
-    public function getTimeTo(): int
+    public function getDateTo(): int
     {
-        return $this->timeTo;
+        return $this->dateTo;
     }
 
     public function getStatus(): ?int
@@ -45,5 +49,15 @@ class CodesFiltersDTO extends DTO
     public function getPhone(): ?string
     {
         return $this->phone;
+    }
+
+    public function getLimit(): int
+    {
+        return $this->limit;
+    }
+
+    public function getOffset(): int
+    {
+        return $this->offset;
     }
 }
