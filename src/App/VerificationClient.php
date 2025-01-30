@@ -7,6 +7,7 @@
 
 namespace Dotsplatform\Verification;
 
+use Dotsplatform\Verification\DTO\CodesFiltersDTO;
 use Dotsplatform\Verification\DTO\StartVerificationResponseDTO;
 use Dotsplatform\Verification\DTO\UserDTO;
 use GuzzleHttp\Exception\ClientException;
@@ -26,6 +27,8 @@ class VerificationClient extends HttpClient
     private const FIND_USER_URL_TEMPLATE = '/api/accounts/%s/users/%s';
     private const START_VERIFICATION_URL_TEMPLATE = '/api/accounts/%s/verification/start';
     private const CONFIRM_URL_TEMPLATE = '/api/accounts/%s/verification/confirm';
+
+    private const GET_VERIFICATION_CODES_TEMPLATE = '/api/accounts/%s/verification/codes';
     private const DELETE_USER_URL_TEMPLATE = '/api/accounts/%s/users/%s';
 
     public function storeAccount(StoreAccountDTO $dto): void
@@ -146,6 +149,16 @@ class VerificationClient extends HttpClient
         }
     }
 
+    public function searchVerificationCodes(
+        string $accountId,
+        CodesFiltersDTO $dto,
+    ): array {
+        $url = $this->generateConfirmUrl($accountId);
+        $params = $dto->toArray();
+
+        return $this->get($url, $params);
+    }
+
     private function generateStoreAccountUrl(): string
     {
         return self::STORE_ACCOUNT_URL_TEMPLATE;
@@ -179,5 +192,10 @@ class VerificationClient extends HttpClient
     private function generateConfirmUrl(string $accountId): string
     {
         return sprintf(self::CONFIRM_URL_TEMPLATE, $accountId);
+    }
+
+    private function generateGetVerificationCodesUrl(string $accountId): string
+    {
+        return sprintf(self::GET_VERIFICATION_CODES_TEMPLATE, $accountId);
     }
 }
