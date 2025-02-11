@@ -14,11 +14,13 @@ class VerificationAccountSettingsDTO extends DTO
     protected string $verificationType;
     protected RikkiComDTO $rikki;
     protected TelegramGatewayAccountSettingsDTO $telegram_gateway;
+    protected FallbackSettingsDTO $telegramFallbackSettings;
 
     public static function fromArray(array $data): static
     {
         $data['rikki'] = RikkiComDTO::fromArray($data['rikki'] ?? []);
         $data['telegram_gateway'] = TelegramGatewayAccountSettingsDTO::fromArray($data['telegram_gateway'] ?? []);
+        $data['telegramFallbackSettings'] = FallbackSettingsDTO::fromArray($data['telegramFallbackSettings'] ?? []);
         return parent::fromArray($data);
     }
 
@@ -35,5 +37,10 @@ class VerificationAccountSettingsDTO extends DTO
     public function getVerificationType(): string
     {
         return $this->verificationType;
+    }
+
+    public function getTelegramFallbackSettings(): FallbackSettingsDTO
+    {
+        return $this->telegramFallbackSettings;
     }
 }
