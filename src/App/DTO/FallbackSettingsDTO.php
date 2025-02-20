@@ -18,9 +18,9 @@ class FallbackSettingsDTO extends DTO
 
     protected ?int $sendFallbackTimeout;
 
-    public function isSendFallback(): bool
+    public function isNeedToSendFallback(): bool
     {
-        return $this->sendFallback;
+        return $this->sendFallback && $this->sendFallbackTimeout;
     }
 
     public function getFallbackVerificationType(): string
