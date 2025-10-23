@@ -15,6 +15,7 @@ class VerificationAccountSettingsDTO extends DTO
     protected RikkiComDTO $rikki;
     protected TelegramGatewayAccountSettingsDTO $telegram_gateway;
     protected FallbackSettingsDTO $telegramFallbackSettings;
+    protected ?float $lowBalanceThreshold = null;
 
     public static function fromArray(array $data): static
     {
@@ -42,5 +43,10 @@ class VerificationAccountSettingsDTO extends DTO
     public function getTelegramFallbackSettings(): FallbackSettingsDTO
     {
         return $this->telegramFallbackSettings;
+    }
+
+    public function getLowBalanceThreshold(): ?float
+    {
+        return $this->lowBalanceThreshold;
     }
 }
