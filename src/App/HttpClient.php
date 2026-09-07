@@ -26,7 +26,17 @@ abstract class HttpClient
     public function __construct(
     ) {
         $this->serviceHost = config('verification-api-sdk.verification-server.host');
-        $this->gatewayToken = (string) config('verification-api-sdk.verification-server.token');
+        $this->gatewayToken = $this->resolveGatewayToken();
+    }
+
+    private function resolveGatewayToken(): string
+    {
+        $token = config('verification-api-sdk.verification-server.token');
+        if (!is_string($token)) {
+            return '';
+        }
+
+        return $token;
     }
 
     protected function makeClient(): GuzzleClient
