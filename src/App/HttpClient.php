@@ -131,7 +131,23 @@ abstract class HttpClient
         throw new VerificationHttpClientException(
             'Verification Request failed with status code',
             $response->getStatusCode(),
+            null,
+            $this->decodeErrorResponseBody($response),
         );
+    }
+
+    /**
+     * Never fails: an error answer with a non-JSON or scalar body gives an empty array,
+     * so the caller still gets the VerificationHttpClientException it always got.
+     */
+    private function decodeErrorResponseBody(ResponseInterface $response): array
+    {
+        $responseBody = (string)$response->getBody();
+        $data = json_decode($responseBody, true);
+        if (!is_array($data)) {
+            return [];
+        }
+        return $data;
     }
 
     private function prepareRequestBody(?array $body, array $params): array

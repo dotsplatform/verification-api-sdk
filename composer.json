@@ -9,6 +9,11 @@
             "Dots\\": "library/Dots/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Dotsplatform\\Verification\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Oleksandr Polosmak",
@@ -24,7 +29,8 @@
     },
     "require-dev": {
         "phpstan/phpstan": "^1.",
-        "eduarguz/shift-php-cs": "^3.0"
+        "eduarguz/shift-php-cs": "^3.0",
+        "phpunit/phpunit": "^11.5"
     },
     "scripts": {
         "init-pre-commit": [
