@@ -16,6 +16,7 @@ use Dotsplatform\Verification\DTO\StoreAccountDTO;
 use Dotsplatform\Verification\DTO\VerificationAccountSettingsDTO;
 use Dotsplatform\Verification\Exception\TooManyVerificationAttempts;
 use Dotsplatform\Verification\Exception\VerificationCodeException;
+use Dotsplatform\Verification\Exception\VerificationCodeLockedException;
 use Dotsplatform\Verification\Exception\VerificationHttpClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Collection;
@@ -32,6 +33,11 @@ class VerificationClient extends HttpClient
 
     private const GET_VERIFICATION_CODES_TEMPLATE = '/api/accounts/%s/verification/codes';
     private const DELETE_USER_URL_TEMPLATE = '/api/accounts/%s/users/%s';
+
+    private const TOO_MANY_ATTEMPTS_STATUS_CODE = 429;
+    private const BAD_REQUEST_STATUS_CODE = 400;
+    // The verification service answers its send limit with 400 and this message, not with 429.
+    private const TOO_MANY_ATTEMPTS_MESSAGE = 'Too many attempts';
 
     public function storeAccount(StoreAccountDTO $dto): void
     {
@@ -119,10 +125,10 @@ class VerificationClient extends HttpClient
         try {
             $response = $this->post($url, $body);
         } catch (VerificationHttpClientException $e) {
-            if ($e->getCode() === 429) {
+            if ($this->isTooManyAttemptsAnswer($e)) {
                 throw new TooManyVerificationAttempts(
                     $e->getMessage(),
-                    $e->getCode(),
+                    self::TOO_MANY_ATTEMPTS_STATUS_CODE,
                 );
             }
         } catch (ClientException) {
@@ -131,6 +137,11 @@ class VerificationClient extends HttpClient
         return StartVerificationResponseDTO::fromArray($response ?? []);
     }
 
+    /**
+     * @throws VerificationCodeLockedException too many wrong codes, a new code has to be sent
+     * @throws VerificationCodeException the code is wrong or the request failed
+     * @throws GuzzleException
+     */
     public function confirm(
         string $accountId,
         string $phone,
@@ -144,6 +155,12 @@ class VerificationClient extends HttpClient
         try {
             $this->post($url, $body);
         } catch (VerificationHttpClientException $e) {
+            if ($this->isCodeLockedAnswer($e)) {
+                throw new VerificationCodeLockedException(
+                    $e->getMessage(),
+                    $e->getCode(),
+                );
+            }
             throw new VerificationCodeException(
                 $e->getMessage(),
                 $e->getCode(),
@@ -160,6 +177,23 @@ class VerificationClient extends HttpClient
         return CodesDTO::fromArray($this->get($url, [
             'json' => $dto->toArray(),
         ]) ?? []);
+    }
+
+    private function isTooManyAttemptsAnswer(VerificationHttpClientException $exception): bool
+    {
+        if ($exception->getCode() === self::TOO_MANY_ATTEMPTS_STATUS_CODE) {
+            return true;
+        }
+        if ($exception->getCode() !== self::BAD_REQUEST_STATUS_CODE) {
+            return false;
+        }
+
+        return $exception->getResponseMessage() === self::TOO_MANY_ATTEMPTS_MESSAGE;
+    }
+
+    private function isCodeLockedAnswer(VerificationHttpClientException $exception): bool
+    {
+        return $exception->getResponseErrorCode() === VerificationCodeLockedException::ERROR_CODE;
     }
 
     private function generateStoreAccountUrl(): string
